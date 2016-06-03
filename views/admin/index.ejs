@@ -1,0 +1,72 @@
+<% include header %>
+<div>
+    <% if (!error) { %>
+
+    <% var group = result.group;%>
+    <% for(var i = 0;i < group.length; i++){ var orders = group[i]; %>
+    <div id="shop-<%= orders.shop._id %>">
+        <h1 class="page-title">
+            <strong><a href="/shop/<%= orders.shop._id %>"><%= orders.shop.name %></a> </strong>
+            <span class="shop_tel">电话：<%= orders.shop.tel %></span>
+        </h1>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>订餐统计清单</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% for(var key in orders.analytics){ %>
+            <tr>
+                <td><%= orders.analytics[key].name %> - <%= orders.analytics[key].num %>份</td>
+            </tr>
+            <% } %>
+            </tbody>
+            <tfoot>
+            <tr style="text-align: right;background: #f9f9f9;">
+                <td colspan="3">
+                    <p>共计 <b><%= orders.totalNum %></b> 份</p>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th class="name">姓名</th>
+                <th class="food">订单明细</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% orders.orders.forEach(function(order){ %>
+            <tr data-id="<%= order._id %>">
+                <td class="name user-<%= order.user_id %>"><%= order.user_name %></td>
+                <td class="food">
+                    <ul>
+                        <% order.order.forEach(function(food){ %>
+                        <li><%= food.name %> - <%= food.num %> 份</li>
+                        <% }) %>
+                    </ul>
+                </td>
+            </tr>
+            <% }) %>
+            </tbody>
+            <tfoot>
+            <tr style="text-align: right;background: #f9f9f9;">
+                <td colspan="6">
+                    共计：<b><%= orders.totalNum %></b> 份
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+    <% }}else{ %>
+    <div class="main inner today_null">
+        <div class="txt">
+            <h3>还没有人点餐</h3>
+            <p>可能同学们太忙忘记了，赶紧去群里吼一声，大家快<a href="/">点餐</a>哦!</p>
+        </div>
+    </div>
+    <% } %>
+</div>
+<% include footer %>

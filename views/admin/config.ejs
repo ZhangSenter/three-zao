@@ -1,0 +1,61 @@
+<% include header %>
+<link rel="stylesheet" href="/timepicker/css/bootstrap-timepicker.css">
+<form method="POST" class="form-horizontal" action="/admin/config">
+    <fieldset>
+        <legend>系统参数设置</legend>
+        <div class="control-group">
+            <label class="control-label" for="name">订餐开始时间</label>
+
+            <div class="controls bootstrap-timepicker timepicker">
+                <input type="text" name="startTime" id="startTime">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="address">订餐结束时间</label>
+
+            <div class="controls">
+                <input type="text" name="endTime" id="endTime">
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="address">单人最大订餐数</label>
+
+            <div class="controls">
+                <input type="number" name="maxOrder" id="maxOrder" value="<%= config.maxOrder %>">
+            </div>
+        </div>
+
+        <div class="control-group">
+            <div class="controls">
+                <button class="btn btn-primary" type="submit">保存</button>
+            </div>
+        </div>
+    </fieldset>
+</form>
+<script type="text/javascript" src="/timepicker/js/bootstrap-timepicker.js"></script>
+<script>
+    $(function () {
+//        $('#startTime').timepicker({
+//            minuteStep: 1,
+//            template: 'modal',
+//            appendWidgetTo: 'body',
+//            showSeconds: true,
+//            showMeridian: false,
+//            defaultTime: false
+//        });
+        $('#startTime').timepicker({
+            minuteStep: 1,
+            showSeconds: false,
+            showMeridian: false,
+            defaultTime: '<%= config.startTime %>'
+        });
+        $('#endTime').timepicker({
+            minuteStep: 1,
+            showSeconds: false,
+            showMeridian: false,
+            defaultTime: '<%= config.endTime %>'
+        });
+    });
+</script>
+<% include footer %>

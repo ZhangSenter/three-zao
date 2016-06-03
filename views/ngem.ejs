@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<html>
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>
+        三灶
+    </title>
+</head>
+<script src='/js/Ngem.js?v=4'></script>
+<script src='/js/webviewJs.js?v=3'></script>
+<body>
+<p>
+    <xmp id="show">
+    </xmp>
+</p>
+<p>
+    <xmp id="init">
+    </xmp>
+</p>
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script>
+//    var account = 'aaaaa';
+//    var uid = '111111';
+//    $.post('/api/login', {'uid': uid, 'account': account}, function(data){
+//        console.dir(data);
+//        if (data.url) {
+//            window.location.href = data.url;
+//        }
+//    });
+    window.ngem.getClientInfo(
+            function(jsonObj) {
+                console.log("GetClientInfo***");
+                if(jsonObj!=null){
+                    console.log("jsonObj 内容");
+                    console.dir(jsonObj);
+                    var account = jsonObj.name;
+                    var uid = jsonObj.uid;
+                    $.post('/api/login', {'uid': uid, 'account': account}, function(data){
+                        console.dir(data);
+                        if (data.url) {
+                            window.location.href = data.url;
+                        }
+                    });
+                }
+            }
+    );
+</script>
+</body>
+</html>

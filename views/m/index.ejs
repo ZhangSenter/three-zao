@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>我的生活</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!--iphone设备中的safari私有meta标签，它表示：允许全屏模式浏览-->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="/sui/css/sm.min.css">
+    <link rel="stylesheet" href="/sui/css/sm-extend.min.css">
+</head>
+<body>
+<div class="page-group">
+    <!-- 订餐首页 -->
+    <div class="page application" id="order">
+        <header class="bar bar-nav">
+            <a class="button button-link button-nav pull-left open-panel" data-panel='#panel-left-demo'>
+                <span class="icon icon-menu"></span>
+            </a>
+            <h1 class="title">三灶订餐</h1>
+            <a class="button button-link button-nav pull-right refresh">
+                <span class="icon icon-refresh"></span>
+            </a>
+        </header>
+        <nav class="bar bar-tab">
+        </nav>
+        <div class="content">
+
+        </div>
+    </div>
+    <div class="panel panel-left panel-reveal theme-dark" id='panel-left-demo'>
+        <div class="content-block">
+            <p>欢迎使用订餐系统</p>
+            <p><a href="#" class="close-panel">关闭</a></p>
+        </div>
+        <div class="list-block">
+        </div>
+    </div>
+</div>
+<!--
+<script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
+-->
+<script language="javascript" type="text/javascript" src="/m/config.js"></script>
+<script language="javascript" type="text/javascript" src="/js/require.js"
+        data-main="/m/main"></script>
+
+<script id="tpl_tab_bar" type="text/template">
+    <a class="tab-item" href="#">
+        <span class="icon icon-home"></span>
+        <span class="tab-label">首页</span>
+    </a>
+    <a class="tab-item" href="#me">
+        <span class="icon icon-me"></span>
+        <span class="tab-label">我</span>
+    </a>
+    <a class="tab-item" href="#settings">
+        <span class="icon icon-settings"></span>
+        <span class="tab-label">设置</span>
+    </a>
+</script>
+<script id="tpl_index" type="text/template">
+    <div class="notice"></div>
+    <div class="menu list-block media-list"></div>
+</script>
+<script id="tpl_notice" type="text/template">
+    <div class="card-header">注意啦</div>
+    <div class="card-content">
+        <div class="card-content-inner">订餐截止到下午3点</div>
+    </div>
+</script>
+<script id="tpl_menu_item" type="text/template">
+    <!--<li>-->
+    <div class="item-link item-content">
+        <div class="item-media"><img
+                    src="/images/fan.jpg"
+                    style='width: 4rem;'></div>
+        <div class="item-inner">
+            <div class="item-title-row">
+                <div class="item-title">${name}</div>
+                <div class="item-after"></div>
+            </div>
+            <div class="item-subtitle">${desc}</div>
+            <div class="item-text">
+                <a href="#" class="book-dinner">订餐</a>
+            </div>
+        </div>
+    </div>
+    <!--</li>-->
+</script>
+<script id="tpl_about_me" type="text/template">
+    <div class="list-block media-list">
+        <ul>
+            <li>
+                <div class="item-content">
+                    <div class="item-media"><img
+                                src="/images/mao.jpg"
+                                style='width: 2.2rem;'></div>
+                    <div class="item-inner">
+                        <div class="item-title-row">
+                            <div class="item-title">你好,
+                                <% if (locals.session.user) { %>
+                                <%= locals.session.user.name %>
+                                <% } %>
+                            </div>
+                        </div>
+                        <div class="item-subtitle">欢迎使用订餐系统</div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="content-block-title">今天订餐</div>
+    <div class="list-block today">
+    </div>
+    <div class="content-block-title">以往订餐记录</div>
+    <div class="list-block old">
+    </div>
+</script>
+<script id="tpl_order_item" type="text/template">
+    <div class="item-media"><i class="icon icon-gift"></i></div>
+    <div class="item-inner">
+        <div class="item-title">${dt}</div>
+        <div class="item-after">
+            {@if today}
+            <a>${name}</a>
+            {@else}
+            ${name}
+            {@/if}
+        </div>
+        <div class="item-after"><span class="badge">${num}</span></div>
+    </div>
+</script>
+<script id="tpl_settings" type="text/template">
+    <div class="list-block">
+        <ul>
+            <li class="item-content item-link">
+                <div class="item-media"><i class="icon icon-search"></i></div>
+                <div class="item-inner about">
+                    <div class="item-title ">关于</div>
+                </div>
+            </li>
+            <li class="item-content item-link">
+                <div class="item-media"><i class="icon icon-gift"></i></div>
+                <div class="item-inner help">
+                    <div class="item-title ">帮助</div>
+                </div>
+            </li>
+            <li class="item-content item-link">
+                <div class="item-media"><i class="icon icon-emoji"></i></div>
+                <div class="item-inner complaints">
+                    <div class="item-title ">吐槽</div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</script>
+</body>
+</html>

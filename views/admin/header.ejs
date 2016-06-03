@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%=title%></title>
+  <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/admin.css">
+  <script type="text/javascript" src="/js/jquery.js"></script>
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/admin">三灶管理后台</a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="/admin">首页</a></li>
+        <% if (locals.session.user.isAdmin) { %>
+        <li class="">
+          <a href="/admin/user">用户列表</a>
+        </li>
+        <% } %>
+        <li>
+          <a href="/admin/shop">店铺列表</a>
+        </li>
+        <li><a href="/admin/config">配置</a></li>
+        <li>
+          <a href="/user/logout">注销</a>
+        </li>
+      </ul>
+    </div><!-- /.nav-collapse -->
+  </div><!-- /.container -->
+  </nav><!-- /.navbar -->
+</div>
+<div class="container">

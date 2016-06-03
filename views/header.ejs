@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>CloudMinds</title>
+    <link href="/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/style.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="/js/jquery.js"></script>
+</head>
+<body>
+<div class="container">
+    <header id="head">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                            aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">CloudMinds</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/">首页</a></li>
+                        <li><a href="/today">今日订餐</a></li>
+                        <% if (locals.session.user) { %>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= locals.session.user.name %><span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/user/order">我的订单</a></li>
+                                <li><a href="/user/account">帐号设置</a></li>
+                                <li><a href="/user/logout">退出</a></li>
+                            </ul>
+                        </li>
+                        <% if (locals.session.user.canOperateShop || locals.session.user.isAdmin) { %>
+                        <li><a href="/admin/">后台</a></li>
+                        <% } %>
+                        <% } %>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
